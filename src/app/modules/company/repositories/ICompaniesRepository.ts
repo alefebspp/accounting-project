@@ -1,5 +1,5 @@
 import { CreateCompanyRequestDTO } from '../dtos/CreateCompanyDTO';
-import { Company } from '@prisma/client';
+import { Company } from '../entities/Company';
 import { UpdateCompanyRequestDTO } from '../dtos/UpdateCompanyDTO';
 
 export interface ICompaniesRepository {

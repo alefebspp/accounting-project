@@ -1,6 +1,7 @@
 import InMemoryCompaniesRepository from '@modules/company/in-memory/InMemoryCompaniesRepository';
 import { FindCompanyUseCase } from './FindCompanyUseCase';
 import AppError from '@errors/AppError';
+import { Company } from '@modules/company/entities/Company';
 
 describe('Find Company', () => {
   let findCompanyUseCase: FindCompanyUseCase;
@@ -11,7 +12,7 @@ describe('Find Company', () => {
   });
 
   it('Should be able to find a company with a id as a parameter', async () => {
-    const company = {
+    const company = new Company({
       cnpj: 'Cnpj test',
       corporate_name: 'Corporate name test',
       fantasy_name: 'Fantasy name test',
@@ -20,7 +21,7 @@ describe('Find Company', () => {
       foundation_date: new Date(),
       status: 'Status test',
       balance: 0
-    };
+    });
 
     const createdCompany = await companiesRepository.create(company);
 

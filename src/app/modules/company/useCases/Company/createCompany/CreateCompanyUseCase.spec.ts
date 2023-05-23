@@ -1,6 +1,7 @@
 import AppError from '@errors/AppError';
 import InMemoryCompaniesRepository from '../../../in-memory/InMemoryCompaniesRepository';
 import { CreateCompanyUseCase } from './CreateCompanyUseCase';
+import { Company } from '@modules/company/entities/Company';
 
 describe('Create Company', () => {
   let createCompanyUseCase: CreateCompanyUseCase;
@@ -32,7 +33,7 @@ describe('Create Company', () => {
 
   it('Should not be able to create company if there is another company with the same cnpj', async () => {
     expect(async () => {
-      const company = {
+      const company = new Company({
         cnpj: 'Cnpj test',
         corporate_name: 'Corporate name test',
         fantasy_name: 'Fantasy name test',
@@ -41,7 +42,7 @@ describe('Create Company', () => {
         foundation_date: new Date(),
         status: 'Status test',
         balance: 0
-      };
+      });
 
       await createCompanyUseCase.execute(company);
 

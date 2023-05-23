@@ -1,5 +1,5 @@
 import { CreateTransactionDTO } from '../dtos/CreateTransactionDTO';
-import { Transaction } from '@prisma/client';
+import { Transaction } from '../entities/Transaction';
 
 export interface ITransactionsRepository {
   create(data: CreateTransactionDTO): Promise<Transaction>;

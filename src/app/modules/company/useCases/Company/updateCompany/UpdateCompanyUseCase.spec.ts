@@ -1,5 +1,6 @@
 import InMemoryCompaniesRepository from '@modules/company/in-memory/InMemoryCompaniesRepository';
 import { UpdateCompanyUseCase } from './UpdateCompanyUseCase';
+import { Company } from '@modules/company/entities/Company';
 
 describe('Update company', () => {
   let companiesRepository: InMemoryCompaniesRepository;
@@ -10,7 +11,7 @@ describe('Update company', () => {
   });
 
   it('should be able to update a company', async () => {
-    const company = {
+    const company = new Company({
       cnpj: 'Cnpj test',
       corporate_name: 'Corporate name test',
       fantasy_name: 'Fantasy name test',
@@ -19,7 +20,7 @@ describe('Update company', () => {
       foundation_date: new Date(),
       status: 'Status test',
       balance: 0
-    };
+    });
 
     const createdCompany = await companiesRepository.create(company);
 

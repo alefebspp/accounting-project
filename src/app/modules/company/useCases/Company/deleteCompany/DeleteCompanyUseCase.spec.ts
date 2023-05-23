@@ -1,6 +1,7 @@
 import InMemoryCompaniesRepository from '@modules/company/in-memory/InMemoryCompaniesRepository';
 import { DeleteCompanyUseCase } from './DeleteCompanyUseCase';
 import AppError from '@errors/AppError';
+import { Company } from '@modules/company/entities/Company';
 
 describe('Delete Company', () => {
   let companiesRepository: InMemoryCompaniesRepository;
@@ -12,7 +13,7 @@ describe('Delete Company', () => {
   });
 
   it('Should be able to delete a company', async () => {
-    const company = {
+    const company = new Company({
       cnpj: 'Cnpj test',
       corporate_name: 'Corporate name test',
       fantasy_name: 'Fantasy name test',
@@ -21,7 +22,7 @@ describe('Delete Company', () => {
       foundation_date: new Date(),
       status: 'Status test',
       balance: 0
-    };
+    });
 
     const createdCompany = await companiesRepository.create(company);
 

@@ -1,16 +1,12 @@
-import { Transaction } from '@prisma/client';
+import { Transaction } from '../entities/Transaction';
 import { CreateTransactionDTO } from '../dtos/CreateTransactionDTO';
 import { ITransactionsRepository } from '../repositories/ITransactionsRepository';
-import { randomUUID } from 'node:crypto';
 
 class InMemoryTransactionsRepository implements ITransactionsRepository {
   public transactions: Transaction[] = [];
 
   async create(data: CreateTransactionDTO): Promise<Transaction> {
-    const transaction = <Transaction>{};
-
-    Object.assign(transaction, {
-      id: randomUUID(),
+    const transaction = new Transaction({
       value: data.value,
       description: data.description,
       date: data.date,

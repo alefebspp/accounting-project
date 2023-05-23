@@ -1,16 +1,13 @@
-import { Company } from '@prisma/client';
+import { Company } from '../entities/Company';
 import { CreateCompanyRequestDTO } from '../dtos/CreateCompanyDTO';
 import { UpdateCompanyRequestDTO } from '../dtos/UpdateCompanyDTO';
 import { ICompaniesRepository } from '../repositories/ICompaniesRepository';
-import { randomUUID } from 'node:crypto';
 
 class InMemoryCompaniesRepository implements ICompaniesRepository {
   companies: Company[] = [];
 
   async create(data: CreateCompanyRequestDTO): Promise<Company> {
-    const company = <Company>{};
-    Object.assign(company, {
-      id: randomUUID(),
+    const company = new Company({
       cnpj: data.cnpj,
       corporate_name: data.corporate_name,
       fantasy_name: data.fantasy_name,
