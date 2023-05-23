@@ -1,0 +1,83 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Company {
+  id                         String      @id @default(uuid())
+  created_at                 DateTime    @default(now())
+  updated_at                 DateTime    @updatedAt
+  cnpj                       String      @unique
+  corporate_name             String
+  fantasy_name               String
+  primary_cnae               String
+  primary_cnae_description   String
+  foundation_date            DateTime
+  status                     String
+  balance                    Float?
+
+  adresses                   Address[]
+  contacts                   Contact[]
+  transaction                Transaction[]
+
+   @@map("company")
+}
+
+model Address {
+  id                         String @id   @default(uuid())
+  created_at                 DateTime     @default(now())
+  updated_at                 DateTime     @updatedAt
+  public_place               String
+  public_place_type          String
+  number                     Int
+  neighborhood               String
+  county                     String
+  uf                         String
+  cep                        Int
+  complement                 String
+  company_id                 String
+
+  company_address            Company       @relation(fields: [company_id], references: [id])
+
+  @@map("adresses")
+}
+
+model Contact {
+ id                      String           @id  @default(uuid())
+ created_at              DateTime         @default(now())
+ updated_at              DateTime         @updatedAt
+ email                   String           @unique
+ phone                   Int
+ company_id              String
+
+ company_contact         Company          @relation(fields: [company_id], references: [id])
+
+ @@map("contacts")      
+}
+
+model Transaction {
+  id                       String          @id @default(uuid())
+  value                    Float
+  description              String
+  date                     DateTime
+  company_id               String
+  parcels                  Int?
+  type                     String
+  payment_type             String
+  finance_type             String
+  created_at               DateTime        @default(now())
+  updated_at               DateTime        @updatedAt
+  
+  company      Company                     @relation(fields: [company_id], references: [id])
+
+   @@map("transactions")
+}
+

@@ -1,0 +1,6 @@
+Descrição|Valor|Data|É parcelado?|Parcelas 
+Venda de casa|40000|21/04/2023|NÃO|- 
+Compra de carro|-20000|21/04/2023|NÃO|- 
+Venda de móvel|500|22/04/2023|NÃO|- 
+Compra de móvel|-200|22/04/2023|SIM|2 
+Venda de Roupas|500|24/04/2023|SIM|3 
